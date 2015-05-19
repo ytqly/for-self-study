@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="dRC" style="width: 300px; height: 30px; background: forestgreen;">过犹不及</div>
+<button onclick="deleteRangeContent(true)">delete content</button>
+<button onclick="deleteRangeContent(false)">delete element</button>
+
+
+<h1>Selection对象与Range对象的使用</h1>
+Select content before you click on the button 'click me'
+<input type="button" value="click me" onclick="rangeTest()"/>
+<div id="showRange"></div>
+
+<p id="p">这里是随便书写的内容 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, vel.</p>
+<button onclick="cloneTest()">clone</button>
+
+<div id="div">
+    How are you?
+    <br/>
+    <button onclick="cloneTest2()">clone2</button>
+    <br/>
+</div>
+
+<div id="srcDiv" style="background: aqua; width: 300px; height: 50px;">How are you???</div>
+<div id="descDiv" style="background: bisque; width: 300px; height: 50px;"></div>
+<button onclick="moveContent()">move element</button>
+
+<div onmouseup="moveButton()" style="width: 500px; height: 50px; background: mediumaquamarine;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi, at dolorum illo nisi qui tempora voluptatem? Beatae, eveniet officiis?</div>
+<button id="mBBtn">button</button>
+
+<p>Lorem ipsum dolor sit amet, <strong id="boldTest">consectetur</strong> adipisicing elit. Consequuntur dicta eius impedit nostrum possimus quidem sit
+    totam. Accusantium, repellendus unde.</p>
+<button onclick="comparePosition()">compare position</button>
+
+<div id="oDivCol" style="background: bisque; width: 300px; height: 50px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, quis.</div>
+<button onclick="selectRangeContents()">选择元素</button>
+<button onclick="unSelect()">取消元素</button>
+<button onclick="showRange()">显示Range内容</button>
+<script>
+    function deleteRangeContent(onlyContent){
+        var div = document.getElementById('dRC');
+        var rangeObject = document.createRange();
+        if(onlyContent){
+            rangeObject.selectNodeContents(div);
+            rangeObject.deleteContents();
+        }else{
+            rangeObject.selectNode(div);
+            rangeObject.deleteContents();
+        }
+    }
+
+    function rangeTest(){
+        var html;
+        var showRangeDiv = document.getElementById('showRange');
+        var selection = document.getSelection();
+        if(selection.rangeCount>0){
+            html ='You choose '+selection.rangeCount+' element(s)<br/>';
+            for(var i=0; i<selection.rangeCount; i++){
+                var range = selection.getRangeAt(i);
+                html+= (i+1) +' is ' + range + '<br/>';
+            }
+            showRangeDiv.innerHTML = html;
+        }
+    }
+
+    function cloneTest(){
+        var rangeObj = document.createRange();
+        rangeObj.selectNodeContents(document.getElementById('p'));
+        var rangeClone = rangeObj.cloneRange();
+        alert(rangeClone.toString());
+    }
+
+    function cloneTest2(){
+        var div = document.getElementById('div');
+        var rangeObj = document.createRange();
+        rangeObj.selectNodeContents(div);
+        var docFragment = rangeObj.cloneContents();
+        div.appendChild(docFragment);
+    }
+
+    function moveContent(){
+        var srcDiv = document.getElementById('srcDiv');
+        var descDiv = document.getElementById('descDiv');
+        var rangeObj = document.createRange();
+        rangeObj.selectNodeContents(srcDiv);
+        var docFragment = rangeObj.extractContents();
+        descDiv.appendChild(docFragment);
+    }
+
+    function moveButton(){
+        var btn = document.getElementById('mBBtn');
+        var selection = document.getSelection();
+        if(selection.rangeCount > 0){
+            var range = selection.getRangeAt(0);
+            range.insertNode(btn);
+        }
+    }
+
+    function comparePosition(){
+        var boldText = document.getElementById('boldTest');
+        var boldRang = document.createRange();
+        boldRang.selectNodeContents(boldText.firstChild);
+        var selection = document.getSelection();
+        if(selection.rangeCount>0){
+            var selRange = selection.getRangeAt(0);
+            if(selRange.compareBoundaryPoints(Range.START_TO_END, boldRang)<=0){
+                alert('选取的文字在粗体前面');
+            }else{
+                if(selRange.compareBoundaryPoints(Range.END_TO_START, boldRang)>=0){
+                    alert('选取的文字在粗体后面 ');
+                }
+            }
+        }
+    }
+
+    var rangeObj = document.createRange();
+    function selectRangeContents(){
+        var div = document.getElementById('oDivCol');
+        rangeObj.selectNode(div);
+    }
+    function unSelect(){
+        rangeObj.collapse(false);
+    }
+    function showRange(){
+        alert(rangeObj.toString());
+    }
+</script>
+</body>
+</html>
