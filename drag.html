@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>drag and drop</title>
+    <style>
+        .box {
+            width: 400px;
+            height: 400px;
+            display: inline-block;
+        }
+        #boxOne{
+            background: #cccccc;
+        }
+        #boxTwo{
+            background: aqua;
+        }
+        .fl{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div class="box fl" id="boxOne"></div><div class="box fl" id="boxTwo"></div> <span class="fl" id="msg"></span>
+<img src="images/two%20birds.jpg" style="width: 100px;" alt="" id="imgOne"/>
+<script>
+    var boxDiv1, boxDiv2, msgSpan, imgOne;
+    window.onload = function(){
+        boxDiv1 = document.getElementById('boxOne');
+        boxDiv2 = document.getElementById('boxTwo');
+        msgSpan = document.getElementById('msg');
+        imgOne = document.getElementById('imgOne');
+        /*boxDiv1.ondragenter = function(e){
+            showObj(e);
+        };*/
+
+        boxDiv1.ondragover = function(e){
+            e.preventDefault();
+        };
+
+        boxDiv2.ondragover = function(e){
+            e.preventDefault();
+        };
+
+        imgOne.ondragstart = function(e){
+            e.dataTransfer.setData('imgId', 'imgOne');
+        };
+
+        boxDiv1.ondrop = dropImageHandler;
+        boxDiv2.ondrop = dropImageHandler;
+    };
+
+    function dropImageHandler(e){
+        showObj(e);
+        e.preventDefault();
+        var img = document.getElementById(e.dataTransfer.getData('imgId'));
+        e.target.appendChild(img);
+    }
+
+    function showObj(obj) {
+        var s = '';
+        for(var k in obj){
+            s+=k+':'+obj[k]+'<br/>';
+        }
+        msgSpan.innerHTML = s;
+    }
+</script>
+</body>
+</html>
