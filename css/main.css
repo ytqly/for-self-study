@@ -1,0 +1,9 @@
+h1{
+    background: rgb(185, 173, 125);
+}
+
+img{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}

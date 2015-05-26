@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>地图显示</title>
+    <style type="text/css">
+        body{margin:0;height:100%;width:100%;position:absolute;}
+        #mapContainer{height:100%;width:100%;}
+    </style>
+</head>
+<body>
+<div id="mapContainer"></div>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b074d122dc61674e011546cdf4be1f00"></script>
+<script type="text/javascript">
+    (function(exports){
+        /*var map = new AMap.Map('mapContainer', {
+            //resizeEnable: true,
+            //rotateEnable: true,
+            //dragEnable: true,
+            //zoomEnable: true,
+            //设置可缩放的级别
+            //zooms: [3,18],
+            //传入2D视图，设置中心点和缩放级别
+            view: new AMap.View2D({
+                center: new AMap.LngLat(116.397428, 39.90923),
+                zoom: 12
+            })
+        });*/
+        var map = new AMap.Map('mapContainer', {
+            cursor: 'progress'
+        });
+/*        map.setZoom(17);
+        console.log(map.getZoom());*/
+
+        /*AMap.event.addListener(map, 'dragend', function(){
+            alert("you clicked me");
+        });*/
+
+        map.plugin(['AMap.MapType'], function(){
+            var type = new AMap.MapType({
+                defaultType: 0
+            });
+            map.addControl(type);
+        });
+
+/*        map.plugin(['AMap.MouseTool'], function(){
+            var mt = new AMap.MouseTool(map);
+            mt.polygon();
+        });*/
+        map.plugin(['AMap.RangingTool'], function(){
+            var ruler = new AMap.RangingTool(map);
+            ruler.turnOn();
+        });
+
+        map.plugin(['AMap.ToolBar'], function(){
+            var tool = new AMap.ToolBar();
+            map.addControl(tool);
+        });
+        map.plugin(['AMap.Scale'], function(){
+            var scale = new AMap.Scale();
+            map.addControl(scale);
+        });
+        map.plugin(['AMap.OverView'], function(){
+            var view = new AMap.OverView({
+                isOpen: true
+            });
+            map.addControl(view);
+        });
+    })(window);
+
+</script>
+</body>
+</html>
