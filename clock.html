@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>digital clock</title>
+	<style>
+	body{
+		color: #fff;
+		background: black;
+	}
+	.number{
+		width: 450px;
+		margin: 200px auto 0;
+		font-size: 50px;
+	}
+	img{
+		vertical-align: middle;
+	}
+	</style>
+	<script>
+	function toDou(n){
+		if(n<10){
+			return "0"+n;
+		}
+		else{
+			return ""+n;
+		}
+	}
+	window.onload=function(){
+		var imgs = document.getElementsByTagName("img");
+		// var str = "012352";
+		function calcTime(){
+			var now = new Date();
+			var str = toDou(now.getHours())+toDou(now.getMinutes())+toDou(now.getSeconds());
+			for (var i = 0; i < imgs.length; i++) {
+				// imgs[i].src="images/"+str[i]+".png"; //does not support ie7
+				imgs[i].src="images/"+str.charAt(i)+".png";
+			};
+		}
+		setInterval(calcTime, 1000);
+		calcTime();
+	}
+	</script>
+</head>
+<body>
+	<div class="number">
+		<img src="images/0.png" />
+		<img src="images/1.png" />
+		:
+		<img src="images/2.png" />
+		<img src="images/3.png" />
+		:
+		<img src="images/2.png" />
+		<img src="images/2.png" />
+	</div>
+</body>
+</html>
