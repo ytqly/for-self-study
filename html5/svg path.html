@@ -230,6 +230,26 @@
         <td valign="top">Closes the path by drawing a line from current point to first point.</td>
     </tr>
     </tbody></table>
+
+    <p>SVG marker element</p>
+    <svg width="500" height="100">
+	    <defs>
+	        <marker id="markerSquare" markerWidth="7" markerHeight="7" refX="4" refY="4" orient="auto">
+	            <rect x="1" y="1" width="5" height="5" style="stroke: none; fill:#000000;"></rect>
+	        </marker>
+
+	        <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="7" orient="auto">
+	            <path d="M2,2 L2,13 L8,7 L2,2" style="fill: #000000;"></path>
+	        </marker>
+	    </defs>
+
+	    <path d="M100,20 l50,0 l0,50 l50,0" style="stroke: #0000cc; stroke-width: 1px; fill: none;
+	                       marker-start: url(#markerSquare);
+	                       marker-end: url(#markerArrow);
+	                       marker-mid: url(#markerSquare);
+	                     "></path>
+
+	</svg>
 </body>
 <br/>
 <a href="http://jenkov.com">from jenkov.com</a>
