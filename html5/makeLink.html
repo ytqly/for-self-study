@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>make link</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        #main{
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .box{
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: rgb(255, 0, 38);
+            position: absolute;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+        #a1{
+            left: 35px;
+            top: 50px;
+        }
+        #a2{
+            left: 65px;
+            top: 150px;
+        }
+        #a3{
+            left: 198px;
+            top: 350px;
+        }
+        #a4{
+            left: 635px;
+            top: 210px;
+        }
+        #a5{
+            left: 200px;
+            top: 250px;
+        }
+        #a6{
+            left: 1035px;
+            top: 50px;
+        }
+        line{
+            stroke-dasharray: 5 2;
+            /*stroke-dashoffset: 20;*/
+            transition: 1s;
+            -webkit-animation: lineFly 1s linear infinite;
+            animation: lineFly 1s linear infinite;
+        }
+
+        @-webkit-keyframes lineFly {
+            from{
+                stroke-dashoffset: 0;
+            }
+            to {
+                stroke-dashoffset: 50;
+            }
+        }
+
+        @keyframes lineFly {
+            from{
+                stroke-dashoffset: 0;
+            }
+            to {
+                stroke-dashoffset: 50;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div class="box" id="a1">a1</div>
+    <div class="box" id="a2">a2</div>
+    <div class="box" id="a3">a3</div>
+    <div class="box" id="a4">a4</div>
+    <div class="box" id="a5">a5</div>
+    <div class="box" id="a6">a6</div>
+    <svg id="lines" width="100%" height="100%"></svg>
+</div>
+<script src="../js/jquery.min.js"></script>
+<script>
+    $(function(){
+        var data = [
+            {start: '#a1', end: '#a2'},
+            {start: '#a2', end: '#a5'},
+            {start: '#a5', end: '#a3'},
+            {start: '#a5', end: '#a4'},
+            {start: '#a4', end: '#a6'}
+        ];
+
+        $('#lines').find('line').remove();
+
+        var ns = 'http://www.w3.org/2000/svg';
+
+        for(var i = 0, len = data.length; i < len; i++){
+            var _obj = data[i];
+            var s = $(_obj.start).position();
+            var d = $(_obj.end).position();
+            var _lines = document.createElementNS(ns, 'line');
+            $(_lines).attr({
+                x1: s.left + 25,
+                y1: s.top + 25,
+                x2: d.left + 25,
+                y2: d.top + 25,
+                stroke: 'red',
+                'stroke-width': 2
+            }).appendTo('#lines');
+        }
+    });
+</script>
+</body>
+</html>
