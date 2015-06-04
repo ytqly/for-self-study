@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>move</title>
+	<style>
+	*{margin: 0; padding: 0;}
+	#slide{width: 880px; height: 392px;
+	overflow: hidden; margin: 100px auto; position: relative;}
+	#slide ul{height: 165px; position: absolute; left: 0; top: 0;}
+	#slide li{float: left; list-style: none; width: 220px;}
+	#slide li img{width: 100%; height: 100%;}
+	</style>
+	<script>
+	window.onload=function(){
+		var slide = document.getElementById("slide");
+		var ul = slide.getElementsByTagName("ul")[0];
+		var li = ul.getElementsByTagName("li");
+		
+		ul.innerHTML = ul.innerHTML+ul.innerHTML;
+		ul.style.width = li[0].offsetWidth*li.length+"px";
+		
+		function move(){
+			if(ul.offsetLeft<-ul.offsetWidth/2){
+				ul.style.left="0";
+			}
+			ul.style.left = ul.offsetLeft-2+"px";
+		}
+		
+		var timer = setInterval(move,30);
+
+		ul.onmouseover=function(){
+			clearInterval(timer);
+		}
+		ul.onmouseout=function(){
+			timer = setInterval(move,30);
+		}
+	}
+	</script>
+</head>
+<body>
+	<div id="slide">
+		<ul>
+			<li><img src="images/mock1.jpg" alt=""></li>
+			<li><img src="images/mock2.jpg" alt=""></li>
+			<li><img src="images/mock3.jpg" alt=""></li>
+			<li><img src="images/mock4.jpg" alt=""></li>
+		</ul>
+	</div>
+</body>
+</html>

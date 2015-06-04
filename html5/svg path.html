@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>svg path</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            padding: 30px;
+        }
+        .desc{
+            width: 60%;
+        }
+        .desc p{
+            margin: 0 0 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="desc">
+    <p>d="M50,50 A30,50 0 0,1 100,100" </p>
+    <p>d="M50,50 A(rx-radius in x-direction),(ry-radius in y-direciton) (x-axis-rotation) (large-arc-flag),(sweep-flag) 100,100"</p>
+    <p>This example draws an arc from the point 50,50 to the point 100,100 (specified last in the A command).</p>
+    <p>The radius of the arc is set by the two first parameters set on the A command. The first parameter is rx (radius in x-direction) and the second is ry (radius in y-direction). Setting rx and ry to the same value will result in a circular arc. Setting rx and ry to different values will result in an elliptical arc. In the example above rx was set to 30 and ry to 50.</p>
+    <p>The third parameter set on the A command is the x-axis-rotation. This sets the rotation of the arc's x-axis compared to the normal x-axis. In the above example the x-axis-rotation is set to 0. Most of the time you will not need to change this parameter.</p>
+    <p>The fourth and fifth parameters are the large-arc-flag and sweep-flag parameters. The large-arc-flag determines whether to draw the smaller or bigger arc satisfying the start point, end point and rx and ry. Here is an example drawing 4 arcs each with different combinations of the large-arc-flag and sweep-flag.</p>
+</div>
+<svg width="100%" height="120" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <path d="M50,50 A30,50 0 0,1 100,100"
+          style="stroke:#660000; fill:none;"></path>
+    <path d="M40,20 A30,30 0 0,0 70,70"
+          style="stroke: #cccc00; stroke-width:2; fill:none;"></path>
+
+    <path d="M40,20 A30,30 0 1,0 70,70"
+          style="stroke: #ff0000; stroke-width:2; fill:none;"></path>
+
+    <path d="M40,20 A30,30 0 1,1 70,70"
+          style="stroke: #00ff00; stroke-width:2; fill:none;"></path>
+
+    <path d="M40,20 A30,30 0 0,1 70,70"
+          style="stroke: #0000ff; stroke-width:2; fill:none;"></path>
+</svg>
+<svg width="500" height="210">
+    <path d="M50,50 Q50,75 100,100" style="stroke: #006666; fill:none;"></path>
+    <circle cx="50" cy="75" r="2" style="fill: #0000ff;"></circle>
+
+    <path d="M200,50 Q200,100 250,100" style="stroke: #006666; fill:none;"></path>
+    <circle cx="200" cy="100" r="2" style="fill: #0000ff;"></circle>
+
+    <path d="M350,50 Q350,150  400,100" style="stroke: #006666; fill:none;"></path>
+    <circle cx="350" cy="150" r="2" style="fill: #0000ff;"></circle>
+
+</svg>
+<svg width="500" height="125">
+    <path d="M50,50 C10,100  190,100 150,50" style="stroke: #006666; fill:none;"></path>
+
+    <circle cx="10" cy="100" r="2" style="fill: #0000ff;"></circle>
+    <circle cx="190" cy="100" r="2" style="fill: #0000ff;"></circle>
+    <path d="M360,50 C310,10  490,90 440,50" style="stroke: #006666; fill:none;"></path>
+
+    <circle cx="310" cy="10" r="2" style="fill: #0000ff;"></circle>
+    <circle cx="490" cy="90" r="2" style="fill: #0000ff;"></circle>
+
+</svg>
+<p>In fact, if you draw a line from the start point to the control point, and another line from the control point to the end point, then the line from the middle of the first line to the middle of the second line will be a tangent of the curve. Here is an image illustrating that:</p>
+<svg width="500" height="175">
+    <line x1="50" y1="50" x2="50" y2="150" style="stroke:#000000; stroke-width: 1;"></line>
+    <line x1="50" y1="150" x2="200" y2="100" style="stroke:#000000; stroke-width: 1;"></line>
+    <line x1="50" y1="100" x2="125" y2="125" style="stroke:#000000; stroke-width: 1;"></line>
+    <path d="M50,50 Q50,150  200,100" style="stroke: #00cc00; stroke-width: 2; fill:none;"></path>
+    <circle cx="50" cy="150" r="3" style="fill: #0000ff;"></circle>
+</svg>
+<h2>Path Commands</h2>
+<p>Below is a list of possible pen commands for the SVG path element. Each command consist of one letter and a set of numbers (coordinates etc.) which are parameters to that command. Uppercase commands usually interpret coordinate parameters as absolute coordinates. Lowercase commands usually interpret coordinate parameters as being relative from current pen location.</p>
+<table style="border:1px solid #aaaaaa;" cellspacing="0" cellpadding="5">
+    <tbody><tr><td style="border-bottom:1px solid #aaaaaa;"><b>Com.</b></td>
+        <td style="border-bottom:1px solid #aaaaaa;"><b>Parameters</b></td>
+        <td style="border-bottom:1px solid #aaaaaa;"><b>Name</b></td>
+        <td style="border-bottom:1px solid #aaaaaa;"><b>Description</b></td>
+    </tr>
+
+    <tr><td valign="top">M</td>
+        <td valign="top">x,y</td>
+        <td valign="top">moveto</td>
+        <td valign="top">Moves pen to specified point x,y without drawing.</td>
+    </tr>
+    <tr><td valign="top">m</td>
+        <td valign="top">x,y</td>
+        <td valign="top">moveto</td>
+        <td valign="top">Moves pen to specified point x,y relative to current pen location, without drawing.</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+
+    <tr><td valign="top">L</td>
+        <td valign="top">x,y</td>
+        <td valign="top">lineto</td>
+        <td valign="top">Draws a line from current pen location to specified point x,y .</td>
+    </tr>
+    <tr><td valign="top">l</td>
+        <td valign="top">x,y</td>
+        <td valign="top">lineto</td>
+        <td>Draws a line from current pen location to specified point x,y relative to current pen location.</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+
+    <tr><td valign="top">H</td>
+        <td valign="top">x</td>
+        <td valign="top">horizontal lineto</td>
+        <td>Draws a horizontal line to the point defined by <br>(specified x, pens current y).</td>
+    </tr>
+    <tr><td>h</td>
+        <td valign="top">x</td>
+        <td>horizontal lineto</td>
+        <td>Draws a horizontal line to the point defined by <br>(pens current x + specified x, pens current y).
+            The x is relative to the current pens x position.
+        </td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+
+    <tr><td valign="top">V</td>
+        <td valign="top">y</td>
+        <td valign="top">vertical lineto</td>
+        <td valign="top">Draws a vertical line to the point defined by <br>(pens current x, specified y).</td>
+    </tr>
+    <tr><td valign="top">v</td>
+        <td valign="top">y</td>
+        <td valign="top">vertical lineto</td>
+        <td valign="top">Draws a vertical line to the point defined by <br>(pens current x, pens current y + specified y).
+            The y is relative to the pens current y-position.
+        </td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+
+    <tr><td valign="top">C</td>
+        <td valign="top">x1,y1 x2,y2 x,y</td>
+        <td valign="top">curveto</td>
+        <td valign="top">Draws a cubic Bezier curve from current pen point to x,y.
+            x1,y1 and x2,y2 are start and end control points of the curve,
+            controlling how it bends.
+        </td>
+    </tr>
+    <tr><td valign="top">c</td>
+        <td valign="top">x1,y1 x2,y2 x,y</td>
+        <td valign="top">curveto</td>
+        <td valign="top">Same as C, but interprets coordinates relative to current pen point.</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+
+    <tr><td valign="top">S</td>
+        <td valign="top">x2,y2 x,y</td>
+        <td valign="top">shorthand / <br><nobr>smooth curveto</nobr></td>
+        <td valign="top">Draws a cubic Bezier curve from current pen point to x,y.
+            x2,y2 is the end control point. The start control point is
+            is assumed to be the same as the end control point of the
+            previous curve.
+        </td>
+    </tr>
+    <tr><td valign="top">s</td>
+        <td valign="top">x2,y2 x,y</td>
+        <td valign="top">shorthand / <br>smooth curveto</td>
+        <td valign="top">Same as S, but interprets coordinates relative to current pen point.</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+
+    <tr><td valign="top">Q</td>
+        <td valign="top">x1,y1 x,y</td>
+        <td valign="top">quadratic Bezier curveto</td>
+        <td valign="top">Draws a quadratic Bezier curve from current pen point to x,y.
+            x1,y1 is the control point controlling how the curve bends.
+        </td>
+    </tr>
+    <tr><td valign="top">q</td>
+        <td valign="top">x1,y1 x,y</td>
+        <td valign="top">quadratic Bezier curveto</td>
+        <td valign="top">Same as Q, but interprets coordinates relative to current pen point.</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+
+    <tr><td valign="top">T</td>
+        <td valign="top">x,y</td>
+        <td valign="top">shorthand / smooth quadratic Bezier curveto</td>
+        <td valign="top">Draws a quadratic Bezier curve from current pen point to x,y.
+            The control point is assumed to be the same as the last control point used.
+        </td>
+    </tr>
+    <tr><td valign="top">t</td>
+        <td valign="top">x,y</td>
+        <td valign="top">shorthand / smooth quadratic Bezier curveto</td>
+        <td valign="top">Same as T, but interprets coordinates relative to current pen point.</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+
+    <tr><td valign="top">A</td>
+        <td valign="top">rx,ry <br>x-axis-rotation <br>large-arc-flag,<br>sweepflag <br>x,y</td>
+        <td valign="top">elliptical arc</td>
+        <td valign="top">Draws an elliptical arc from the current point to the point x,y.
+            rx and ry are the elliptical radius in x and y direction.<br>
+            The x-rotation determines how much the arc is to be rotated around the x-axis.
+            It only seems to have an effect when rx and ry have different values.<br>
+            The large-arc-flag doesn't seem to be used (can be either 0 or 1). Neither
+            value (0 or 1) changes the arc. <br>
+            The sweep-flag determines the direction
+            to draw the arc in.
+        </td>
+    </tr>
+    <tr><td valign="top">a</td>
+        <td valign="top">rx,ry <br>x-axis-rotation <br>large-arc-flag,<br>sweepflag <br>x,y</td>
+        <td valign="top">elliptical arc</td>
+        <td valign="top">Same as A, but interprets coordinates relative to current pen point.</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+
+    <tr><td valign="top">Z</td>
+        <td>&nbsp;</td>
+        <td valign="top">closepath</td>
+        <td valign="top">Closes the path by drawing a line from current point to first point.</td>
+    </tr>
+    <tr><td valign="top">z</td>
+        <td>&nbsp;</td>
+        <td valign="top">closepath</td>
+        <td valign="top">Closes the path by drawing a line from current point to first point.</td>
+    </tr>
+    </tbody></table>
+</body>
+<br/>
+<a href="http://jenkov.com">from jenkov.com</a>
+</html>
