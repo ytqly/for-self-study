@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>timer</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        .wrapper{
+            width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+        .btn{
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid #0037F2;
+            background: #1155ff;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+        .popup{
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgba(0, 0, 0, .5);
+            overflow: hidden;
+        }
+        .popup .inner{
+            background: #FFFFFF;
+            width: 500px;
+            height: 230px;
+            margin: 50px auto 0;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,.5);
+        }
+        .popup .hd{
+            color: #FFFFFF;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 10px;
+            -webkit-border-radius: 3px 3px 0 0;
+            -moz-border-radius: 3px 3px 0 0;
+            border-radius: 3px 3px 0 0;
+            background: #1155ff;
+        }
+        .popup .hd .close{
+            cursor: pointer;
+            font-size: 24px;
+            float: right;
+            width: 30px;
+            text-align: center;
+        }
+        .popup .bd{
+            height: 200px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <span class="btn" id="main">main button</span>
+    <span class="btn" id="sub">sub button</span>
+</div>
+<div class="popup" id="popup">
+    <div class="inner">
+        <div class="hd"><div class="close">&times;</div>subtitle</div>
+        <div class="bd">Lorem ipsum dolor sit amet.</div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/timer.js"></script>
+<script>
+    new Timer();
+</script>
+</body>
+</html>
