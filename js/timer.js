@@ -3,7 +3,7 @@ function Timer(){
     this.mainTimerArr = [];
 }
 
-Timer.prototype = {
+Timer.prototype = {  //这里setInterval 的使用有问题，正在调试中...
     init: function(){
         var self = this;
         $('#main').click(function(){
