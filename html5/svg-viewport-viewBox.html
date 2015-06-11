@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>svg viewport and viewBox</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #001122;
+            line-height: 0;
+            font-size: 0;
+        }
+    </style>
+</head>
+<body>
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="-500 -300 1000 600"> <!-- viewBox="x y width height" -->
+    <defs>
+        <polygon id="star" points="0 -20 5 -5 20 0 5 5 0 20 -5 5 -20 0 -5 -5" fill="none" stroke="white" stroke-width="1"></polygon>
+    </defs>
+    <text x="0" y="20">This examples defines a viewport that is 1000 units wide and 600 units high.</text>
+    <g transform="translate(-150, 0)">
+        <use xlink:href="#star">
+            <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="0"
+                to="360"
+                dur="3s"
+                repeatCount="indefinite"
+            ></animateTransform>
+        </use>
+    </g>
+    <polygon points="0 -20 5 -5 20 0 5 5 0 20 -5 5 -20 0 -5 -5" fill="none" stroke="white" stroke-dasharray="10 3">
+        <animate
+            attributeName="stroke"
+            attributeType="css"
+            values="#ffffff;#ff0000;#ffffff"
+            dur="3s"
+            repeatCount="indefinite"
+        ></animate>
+        <animate
+            attributeName="stroke-dashoffset"
+            attributeType="XML"
+            from="0"
+            to="150"
+            dur="10s"
+            repeatCount="indefinite"
+        ></animate>
+        <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="scale"
+            values="1;5;1"
+            dur="3s"
+            repeatCount="indefinite"
+        ></animateTransform>
+    </polygon>
+    <g transform="translate(150, 0)">
+        <use xlink:href="#star">
+            <animateTransform
+                attributeName="transform"
+                type="rotate"
+                values="0;360;0"
+                dur="6s"
+                repeatCount="indefinite"
+            ></animateTransform>
+        </use>
+    </g>
+    <text x="-180" y="-200" font-size="50" font-family="Arial" fill="none" stroke="white" stroke-width="1">SVG Animations</text>
+    <!--<line x1="-800" y1="0" x2="800" y2="0" stroke="white" stroke-width="1"></line>
+    <line x1="0" y1="-300" x2="0" y2="300" stroke="white" stroke-width="1"></line>-->
+</svg>
+</body>
+</html>
