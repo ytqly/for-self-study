@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>drag containment test</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body,
+        .container{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .container{
+            background: #ffffff;
+        }
+        .inner{
+            width: 100px;
+            height: 100px;
+            background: #FF6600;
+            position: absolute;
+            left: 50%;
+            top: 10px;
+        }
+        .droppable{
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            position: absolute;
+            top: 200px;
+            left: 300px;
+            -webkit-transition: background 1s;
+            -moz-transition: background 1s;
+            -ms-transition: background 1s;
+            -o-transition: background 1s;
+            transition: background 1s;
+        }
+        .drophover{
+            background: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="inner"></div>
+    <div class="droppable"></div>
+</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery-ui.js"></script>
+<script>
+    $(function(){
+        $('.inner').draggable({
+//            addClasses: false,
+//            opacity:.9,
+            snap: true,
+//            snapMode: 'inner',
+//            zIndex: 100,
+//            containment: $('body')
+//            containment: 'body'
+            containment: '.container'
+//            containment: 'parent' //parent, document, window
+//            containment: '0 0 800px 800px'
+//            containment: false //[默认值]false, 不限制拖动的活动范围
+        });
+        $('.droppable').droppable({
+            hoverClass: 'drophover'/*,
+            activate: function(event, ui){
+                console.log('activate ', event, ' ----- ', ui);
+                if(event.altKey && event.ctrlKey){
+                    console.log('alt and ctrl');
+                } else if(event.altKey){
+                    console.log('alt key');
+                } else if(event.ctrlKey){
+                    console.log('ctrl key');
+                }
+            },
+            deactivate: function(event, ui){
+                console.log('deactivate ', event, ' ----- ', ui);
+            },
+            over: function(event, ui){
+            }*/
+        });
+    })
+</script>
+</body>
+</html>
