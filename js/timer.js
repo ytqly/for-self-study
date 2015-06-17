@@ -1,6 +1,6 @@
 function Timer(){
     this.init();
-    this.mainTimerArr = [];
+    this.mainTimer = [];
 }
 
 Timer.prototype = {  //这里setInterval 的使用有问题，正在调试中...
@@ -23,42 +23,47 @@ Timer.prototype = {  //这里setInterval 的使用有问题，正在调试中...
                 type: 'get',
                 dataType: 'json',
                 success: function(json){
-                    console.log(now, 'main', json.mos);
+                    console.log(now, 'main', json.mos, '------from codeDancing');
                 }
             });
 
-            console.log(self.mainTimerArr);
+            console.log(self.mainTimer);
         }
         //codeDancing();
-        self.mainTimerArr.push(setInterval(codeDancing, 2000));
+        self.mainTimer  = setInterval(codeDancing, 2000);
     },
     clear: function(){
         var self = this;
-        var len = self.mainTimerArr.length;
+        var len = self.mainTimer.length;
         if(len){
             for(var i = 0; i < len; i++){
-                clearInterval(self.mainTimerArr[i]);
+                clearInterval(self.mainTimer[i]);
+                self.mainTimer[i] = null;
             }
         }
-        console.log('after clear, mainTimerArr is '+self.mainTimerArr);
+        console.log('after clear, mainTimer is '+self.mainTimer);
     },
     sub: function(){
         var self = this;
-        function codeDancing(){
+        function codeDancing2(){
             $.ajax({
                 url: 'data/d.json',
                 type: 'get',
                 dataType: 'json',
                 success: function(json){
-                    console.log('sub', json.mos, self.mainTimerArr);
+                    console.log('sub', json.mos, self.mainTimer, '-----from inner method codeDancing2');
                 }
             });
         }
         //codeDancing();
-        var subTimer = setInterval(codeDancing, 2000);
+        var subTimer = setInterval(codeDancing2, 2000);
         $('#popup').show()
             .find('.close').click(function(){
-                $(this).parents('#popup').hide();
+                $(this).parents('#popup').hide()
+                    .find('.inner').css({
+                    left: 'auto',
+                    top: 'auto'
+                });
                 clearInterval(subTimer);
                 subTimer = null;
                 self.codeDance();
