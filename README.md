@@ -2,9 +2,6 @@
 just for self study
 
 本仓库资源都是来源于网络开源代码（已备出处），搜集来作为参考、学习之用，如果禁止使用，请告知，我会第一时间删除，谢谢
-
-`
-
     git pull
     
     git add */*.js/*.html/*.css
@@ -12,8 +9,6 @@ just for self study
     git commit -m 'msg'
     
     git push
-`
-
 取得Git仓库
 
 初始化一个版本仓库
